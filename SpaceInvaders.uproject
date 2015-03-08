@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{9FFE1B38-4359-B0BC-A170-E4B4BEEA3A3E}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "SpaceInvaders",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
