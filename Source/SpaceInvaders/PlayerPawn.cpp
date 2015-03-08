@@ -26,9 +26,20 @@ void APlayerPawn::Tick( float DeltaTime )
 
 }
 
+void APlayerPawn::MoveSideways(float value)
+{
+	if (FMath::Abs(value) > 0.0f)
+	{
+		FRotator ActorRotation = APlayerPawn::GetActorRotation();
+		FVector Movement = ActorRotation.RotateVector(FVector(-value, 0.0f, 0.0f)) * MoveSpeed;
+		RootComponent->MoveComponent(Movement, ActorRotation, true);
+	}
+}
+
 // Called to bind functionality to input
 void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
+	InputComponent->BindAxis("MoveSideWays", this, &APlayerPawn::MoveSideways);
 	Super::SetupPlayerInputComponent(InputComponent);
 
 }

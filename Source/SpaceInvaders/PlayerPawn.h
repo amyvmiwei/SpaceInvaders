@@ -23,6 +23,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	void MoveSideways(float value);
 	
+	UPROPERTY(Category = Gameplay, EditDefaultsOnly, BlueprintReadWrite)
+		float MoveSpeed = 1;
 	
 };
