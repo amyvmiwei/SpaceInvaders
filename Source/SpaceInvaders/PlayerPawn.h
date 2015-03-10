@@ -27,5 +27,38 @@ public:
 	
 	UPROPERTY(Category = Gameplay, EditDefaultsOnly, BlueprintReadWrite)
 		float MoveSpeed = 1;
+
+	UPROPERTY(Category = Gameplay, EditDefaultsOnly, BlueprintReadWrite)
+		float BulletGap = 1;
+
+	void Shoot();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Gameplay)
+		UClass* MyBulletBlueprint;
+
+	template <typename ASpawnBP>
+	FORCEINLINE ASpawnBP* SpawnBP(
+		UWorld* TheWorld,
+		UClass* TheBP,
+		const FVector& Loc,
+		const FRotator& Rot,
+		const bool bNoCollisionFail = true,
+		AActor* Owner = NULL,
+		APawn* Instigator = NULL
+		)
+	{
+		if (!TheWorld) return NULL;
+		if (!TheBP) return NULL;
+		//~~~~~~~~~~~
+
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.bNoCollisionFail = bNoCollisionFail;
+		SpawnInfo.Owner = Owner;
+		SpawnInfo.Instigator = Instigator;
+		SpawnInfo.bDeferConstruction = false;
+
+		return TheWorld->SpawnActor<ASpawnBP>(TheBP, Loc, Rot, SpawnInfo);
+	}
+
 	
 };

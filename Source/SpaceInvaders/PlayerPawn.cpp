@@ -9,7 +9,6 @@ APlayerPawn::APlayerPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -36,10 +35,19 @@ void APlayerPawn::MoveSideways(float value)
 	}
 }
 
+void APlayerPawn::Shoot()
+{
+	const FVector  GenSpawnLoc(0.0f, 0.0f, 0.0f);
+	const FRotator GenSpawnRot(0.0f, 0.0f, 0.0f);
+	SpawnBP<AActor>(GetWorld(), MyBulletBlueprint, APlayerPawn::GetActorLocation(), GenSpawnRot);
+
+}
+
 // Called to bind functionality to input
 void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	InputComponent->BindAxis("MoveSideWays", this, &APlayerPawn::MoveSideways);
+	InputComponent->BindAction("Shoot", IE_Pressed, this, &APlayerPawn::Shoot);
 	Super::SetupPlayerInputComponent(InputComponent);
 
 }
