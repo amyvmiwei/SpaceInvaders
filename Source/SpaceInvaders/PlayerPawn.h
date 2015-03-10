@@ -33,6 +33,10 @@ public:
 
 	void Shoot();
 
+	bool CanFire = true;
+	
+	void AllowFiring();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Gameplay)
 		UClass* MyBulletBlueprint;
 

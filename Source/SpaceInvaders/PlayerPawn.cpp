@@ -37,10 +37,19 @@ void APlayerPawn::MoveSideways(float value)
 
 void APlayerPawn::Shoot()
 {
-	const FVector  GenSpawnLoc(0.0f, 0.0f, 0.0f);
-	const FRotator GenSpawnRot(0.0f, 0.0f, 0.0f);
-	SpawnBP<AActor>(GetWorld(), MyBulletBlueprint, APlayerPawn::GetActorLocation(), GenSpawnRot);
+	if (CanFire)
+	{
+		const FVector  GenSpawnLoc(0.0f, 0.0f, 0.0f);
+		const FRotator GenSpawnRot(0.0f, 0.0f, 0.0f);
+		SpawnBP<AActor>(GetWorld(), MyBulletBlueprint, APlayerPawn::GetActorLocation(), GenSpawnRot);
+		CanFire = false;
+		GetWorldTimerManager().SetTimer(this, &APlayerPawn::AllowFiring, 0.7f, false);
+	}
 
+}
+void APlayerPawn::AllowFiring()
+{
+	CanFire = true;
 }
 
 // Called to bind functionality to input
