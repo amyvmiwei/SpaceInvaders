@@ -10,13 +10,23 @@ ABulletActor::ABulletActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
 }
 
 // Called when the game starts or when spawned
 void ABulletActor::BeginPlay()
 {
 	Super::BeginPlay();
+	GetWorldTimerManager().SetTimer(this, &ABulletActor::DestroyActor, 2.0f,false);
 	
+}
+void ABulletActor::DestroyActor()
+{
+	// check if actor is valid
+	if (this->IsValidLowLevel())
+	{
+		this->Destroy();
+	}
 }
 
 // Called every frame

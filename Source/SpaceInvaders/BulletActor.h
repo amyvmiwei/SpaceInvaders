@@ -21,7 +21,7 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	UPROPERTY(Category = Gameplay, EditDefaultsOnly, BlueprintReadWrite)
-		float MoveSpeed = 1;
-	
-	
+	float MoveSpeed = 5;
+
+	void DestroyActor();
 };
